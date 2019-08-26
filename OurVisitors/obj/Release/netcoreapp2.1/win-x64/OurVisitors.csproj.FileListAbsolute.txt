@@ -1,0 +1,17 @@
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\hostpolicy.dll
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\hostfxr.dll
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\OurVisitors.exe
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\OurVisitors.deps.json
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\OurVisitors.runtimeconfig.json
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\OurVisitors.runtimeconfig.dev.json
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\OurVisitors.dll
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\win-x64\OurVisitors.pdb
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.csprojAssemblyReference.cache
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.csproj.CoreCompileInputs.cache
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.RazorAssemblyInfo.cache
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.RazorAssemblyInfo.cs
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.AssemblyInfoInputs.cache
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.AssemblyInfo.cs
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.RazorTargetAssemblyInfo.cache
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.dll
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Release\netcoreapp2.1\win-x64\OurVisitors.pdb

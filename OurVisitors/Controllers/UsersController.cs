@@ -22,9 +22,9 @@ namespace OurVisitors.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<Users> GetUsers()
+        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
-            return _context.Users;
+            return await _context.Users.Include(r => r.IdRoleNavigation).ToListAsync();
         }
 
         // GET: api/Users/5
