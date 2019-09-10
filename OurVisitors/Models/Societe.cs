@@ -7,6 +7,7 @@ namespace OurVisitors.Models
     {
         public Societe()
         {
+            SousTraitant = new HashSet<SousTraitant>();
             Visiteur = new HashSet<Visiteur>();
         }
 
@@ -15,6 +16,7 @@ namespace OurVisitors.Models
         public string Status { get; set; }
         public string Telephone { get; set; }
 
+        public ICollection<SousTraitant> SousTraitant { get; set; }
         public ICollection<Visiteur> Visiteur { get; set; }
     }
 }

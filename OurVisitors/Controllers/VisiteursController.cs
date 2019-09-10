@@ -27,6 +27,14 @@ namespace OurVisitors.Controllers
             return _context.Visiteur;
         }
 
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<Visiteur>>> GetAllVisiteur()
+        {
+            return await _context.Visiteur
+                .Include(l => l.IdSocieteNavigation)
+                .ToListAsync();
+        }
+
         // GET: api/Visiteurs
         [HttpGet("today")]
         public async Task<ActionResult<IEnumerable<Visiteur>>> GetVisiteurToday()
@@ -137,7 +145,7 @@ namespace OurVisitors.Controllers
                 _context.SaveChanges();
             }
             return Ok(new {
-                heureSorite = visiteur.HeureSortie
+                heureSortie = visiteur.HeureSortie
             });
         }
 

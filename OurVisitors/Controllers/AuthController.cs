@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using OurVisitors.Models;
 
 namespace OurVisitors.Controllers
 {
+    // [EnableCors("AllowAll")]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -34,7 +36,13 @@ namespace OurVisitors.Controllers
             var user = _context.Users.FirstOrDefault((x) => ((x.Username == userLogin.Username || x.Email == userLogin.Username) && x.Password == userLogin.Password));
             // var user = _context.Users.Where(x => (x.Username == userLogin.Username || x.Email == userLogin.Email))
             if (user == null)
-                return Unauthorized();
+                return Ok(new { message = "Username ou mot de passe incorrect"  });
+                //return StatusCode(StatusCodes.Status401Unauthorized, new
+                //{
+                //    message = "Username ou mot de passe incorrect",
+
+                //});
+                //return Unauthorized();
 
             var claims = new[]
             {
@@ -47,7 +55,7 @@ namespace OurVisitors.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddDays(30),
                 SigningCredentials = creds
             };
 

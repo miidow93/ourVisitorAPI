@@ -19,6 +19,7 @@ namespace OurVisitors.Models
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<Societe> Societe { get; set; }
+        public virtual DbSet<SousTraitant> SousTraitant { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Visiteur> Visiteur { get; set; }
 
@@ -27,7 +28,7 @@ namespace OurVisitors.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.;Database=ourVisitor;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=OurVisitor;Trusted_Connection=True;");
             }
         }
 
@@ -104,6 +105,52 @@ namespace OurVisitors.Models
                     .HasColumnName("telephone")
                     .HasMaxLength(30)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<SousTraitant>(entity =>
+            {
+                entity.ToTable("sousTraitant");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CinCnss)
+                    .HasColumnName("cin_cnss")
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateVisite).HasColumnType("date");
+
+                entity.Property(e => e.HeureEntree).HasColumnName("heureEntree");
+
+                entity.Property(e => e.HeureSortie).HasColumnName("heureSortie");
+
+                entity.Property(e => e.IdSociete).HasColumnName("idSociete");
+
+                entity.Property(e => e.NomComplet)
+                    .HasColumnName("nomComplet")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumBadge).HasColumnName("numBadge");
+
+                entity.Property(e => e.Prestation)
+                    .HasColumnName("prestation")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Superviseur)
+                    .HasColumnName("superviseur")
+                    .HasMaxLength(70)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telephone)
+                    .HasColumnName("telephone")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdSocieteNavigation)
+                    .WithMany(p => p.SousTraitant)
+                    .HasForeignKey(d => d.IdSociete)
+                    .HasConstraintName("FK__sousTrait__idSoc__5CD6CB2B");
             });
 
             modelBuilder.Entity<Users>(entity =>

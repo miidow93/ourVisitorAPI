@@ -68,6 +68,17 @@ namespace OurVisitors.Controllers
 
             _context.Entry(regle).State = EntityState.Modified;
 
+            if(regle.Image.Contains("Upload"))
+            {
+                System.Diagnostics.Debug.WriteLine(regle.Image);
+            } else
+            {
+                System.Diagnostics.Debug.WriteLine("Base64");
+                var imagePath = ConvertImage(regle.Image);
+                regle.Image = imagePath;
+            }
+
+            
             try
             {
                 await _context.SaveChangesAsync();
