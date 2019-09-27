@@ -52,6 +52,12 @@ namespace OurVisitors.Controllers
             return Ok(regle);
         }
 
+        [HttpGet("byOrder")]
+        public async Task<IEnumerable<Regle>> GetRegleByOrder()
+        {
+            return await  _context.Regle.OrderBy(x => x.NumOrdre).ToListAsync();
+        }
+
         // PUT: api/Regles/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRegle([FromRoute] int id, [FromBody] Regle regle)

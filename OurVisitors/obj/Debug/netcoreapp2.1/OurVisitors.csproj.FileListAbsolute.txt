@@ -3,7 +3,6 @@ C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\O
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\OurVisitors.runtimeconfig.dev.json
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\OurVisitors.dll
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\OurVisitors.pdb
-C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.csproj.CoreCompileInputs.cache
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.RazorAssemblyInfo.cache
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.RazorAssemblyInfo.cs
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.AssemblyInfoInputs.cache
@@ -12,3 +11,6 @@ C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\O
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.dll
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.pdb
 C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\obj\Debug\netcoreapp2.1\OurVisitors.csprojAssemblyReference.cache
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\appsettings.Development.json
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\appsettings.json
+C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
