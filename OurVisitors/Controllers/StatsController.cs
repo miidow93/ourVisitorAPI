@@ -24,9 +24,9 @@ namespace OurVisitors.Controllers
         [HttpGet("{month}/{year}")]
         public async Task<IActionResult> GetStatsByMonth([FromRoute] int month, [FromRoute] int year)
         {
-            var monthStats = _context.Visiteur.Where(v => v.DateVisite.Value.Month == month && v.DateVisite.Value.Year == year)
+            var monthStats = await _context.Visiteur.Where(v => v.DateVisite.Value.Month == month && v.DateVisite.Value.Year == year)
                                                 .GroupBy(g => g.DateVisite.Value.Day)
-                                                .Select(s => new { label = s.Key, count = s.Count() });
+                                                .Select(s => new { label = s.Key, count = s.Count() }).ToListAsync();
 
 
 
