@@ -6,7 +6,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, visitez https:
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Mohammed\source\repos\OurVisitors\OurVisitors\bin\Release\netcoreapp2.1\publish4\</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Repos\Api\ourVisitorAPI\OurVisitors\bin\Release\netcoreapp2.1\publish4\</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="OurVisitor">

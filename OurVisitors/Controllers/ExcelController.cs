@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using FastMember;
@@ -25,49 +26,21 @@ namespace OurVisitors.Controllers
         {
             _context = context;
             _environment = environment;
-
         }
 
-        /*[HttpPost]
-        public async Task<IEnumerable<Visiteur>> GetExcelAsync([FromBody] VmFilterDate vmFilterDate)
+        [HttpGet("download/{startDate}/{endDate}")]
+        public async Task<IActionResult> DownloadFile([FromRoute] string startDate, [FromRoute] string endDate)
         {
-            System.Diagnostics.Debug.WriteLine(vmFilterDate.DateEntree + " " + vmFilterDate.DateSortie);
-            var visiteurs = await _context.Visiteur.Where(x => x.DateVisite >= vmFilterDate.DateEntree && x.DateVisite <= vmFilterDate.DateSortie).ToListAsync();
-            DataTable table = new DataTable();
-            using (var reader = ObjectReader.Create(visiteurs, "Id", "nomComplet", "cinCnss", "dateVisite", "heureEntree", "heureSortie", "personneService", "idSociete", "telephone", "numBadge"))
-            {
-                table.Load(reader);
-                System.Diagnostics.Debug.WriteLine(reader);
-            }
-            System.Diagnostics.Debug.WriteLine(table.Rows.Count);
-            XLWorkbook wb = new XLWorkbook();
-            string workSheetFormat = $"our_visitor_{DateTime.Now: yyyy-MM-dd_hh-mm-ss-fff}";
-            // DateTime.Now.ToString("yyyyMMddHHmmssfff") Guid.NewGuid().ToString();
-            wb.Worksheets.Add(table, workSheetFormat);
-            string folderName = "Excel";
-            string webRootPath = _environment.WebRootPath;
-            string pathToSave = Path.Combine(webRootPath, folderName);
-
-            if (!Directory.Exists(pathToSave))
-            {
-                Directory.CreateDirectory(pathToSave);
-            }
-            var fileName = workSheetFormat + ".xlsx";
-            var fullPath = Path.Combine(pathToSave, fileName);
-            wb.SaveAs(fullPath);
-            return visiteurs;
-
-        }*/
-
-        [HttpPost]
-        public async Task<IEnumerable<Visiteur>> GetExcelAsync([FromBody] VmFilterDate vmFilterDate)
-        {
-            System.Diagnostics.Debug.WriteLine(vmFilterDate.DateEntree + " " + vmFilterDate.DateSortie);
-            var visiteurs = await _context.Visiteur.Where(x => x.DateVisite >= vmFilterDate.DateEntree && x.DateVisite <= vmFilterDate.DateSortie).ToListAsync();
-            if(visiteurs.Count > 0)
+            var fp = "";
+            var mm = new MemoryStream();
+            System.Diagnostics.Debug.WriteLine(startDate + " " + endDate);
+            System.Diagnostics.Debug.WriteLine("DateTime: " + DateTime.Parse(startDate) + " " + DateTime.Parse(endDate));
+            var visiteurs = await _context.Visiteur.Where(x => x.DateVisite >= DateTime.Parse(startDate) && x.DateVisite <= DateTime.Parse(endDate)).ToListAsync();
+            if (visiteurs.Count > 0)
             {
                 DataTable table = new DataTable();
                 string[] columns = { "Id", "NomComplet", "CinCnss", "DateVisite", "HeureEntree", "HeureSortie", "PersonneService", "IdSociete", "Telephone", "NumBadge" };
+                // string[] columns = { "Id", "NomComplet", "CinCnss", "DateVisite", "HeureEntree", "HeureSortie", "Superviseur", "Prestation", "IdSociete", "Telephone", "NumBadge" };
                 using (var reader = ObjectReader.Create(visiteurs, columns))
                 {
                     table.Load(reader);
@@ -89,31 +62,49 @@ namespace OurVisitors.Controllers
                 var fileName = workSheetFormat + ".xlsx";
                 var fullPath = Path.Combine(pathToSave, fileName);
                 wb.SaveAs(fullPath);
+                var memory = new MemoryStream();
+
+                using(var stream = new FileStream(fullPath, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+
+                memory.Position = 0;
+                mm = memory;
+                fp = fullPath;
             }
-            
-            return visiteurs;
+
+            return File(mm, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Path.GetFileName(fp));
+
+            // return Ok(new { test = DateTime.Parse(startDate) });
+            //  return File(stream, "application/octet-stream");
             // return File(fullPath, "application/octet-stream");
             // return File(fullPath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
 
-        [HttpPost("soustraitant")]
-        public async Task<IEnumerable<SousTraitant>> GetExcelAsyncSousTraitant([FromBody] VmFilterDate vmFilterDate)
+
+        [HttpGet("soustraitant/download/{startDate}/{endDate}")]
+        public async Task<IActionResult> DownloadFileSousTraitant([FromRoute] string startDate, [FromRoute] string endDate)
         {
-            System.Diagnostics.Debug.WriteLine(vmFilterDate.DateEntree + " " + vmFilterDate.DateSortie);
-            var sousTraitant = await _context.SousTraitant.Where(x => x.DateVisite >= vmFilterDate.DateEntree && x.DateVisite <= vmFilterDate.DateSortie).ToListAsync();
-            if (sousTraitant.Count > 0)
+            var fp = "";
+            var mm = new MemoryStream();
+            System.Diagnostics.Debug.WriteLine(startDate + " " + endDate);
+            System.Diagnostics.Debug.WriteLine("DateTime: " + DateTime.Parse(startDate) + " " + DateTime.Parse(endDate));
+            var sousTraitants = await _context.SousTraitant.Where(x => x.DateVisite >= DateTime.Parse(startDate) && x.DateVisite <= DateTime.Parse(endDate)).ToListAsync();
+            if (sousTraitants.Count > 0)
             {
                 DataTable table = new DataTable();
+                // string[] columns = { "Id", "NomComplet", "CinCnss", "DateVisite", "HeureEntree", "HeureSortie", "PersonneService", "IdSociete", "Telephone", "NumBadge" };
                 string[] columns = { "Id", "NomComplet", "CinCnss", "DateVisite", "HeureEntree", "HeureSortie", "Superviseur", "Prestation", "IdSociete", "Telephone", "NumBadge" };
-                using (var reader = ObjectReader.Create(sousTraitant, columns))
+                using (var reader = ObjectReader.Create(sousTraitants, columns))
                 {
                     table.Load(reader);
                     System.Diagnostics.Debug.WriteLine(reader);
                 }
                 System.Diagnostics.Debug.WriteLine(table.Rows.Count);
                 XLWorkbook wb = new XLWorkbook();
-                string workSheetFormat = $"soustraitant_{DateTime.Now: ddMMyyyy_hhmmssfff}";
+                string workSheetFormat = $"ourvisitor_{DateTime.Now: ddMMyyyy_hhmmssfff}";
                 // DateTime.Now.ToString("yyyyMMddHHmmssfff") Guid.NewGuid().ToString();
                 wb.Worksheets.Add(table, workSheetFormat);
                 string folderName = "Excel";
@@ -127,9 +118,22 @@ namespace OurVisitors.Controllers
                 var fileName = workSheetFormat + ".xlsx";
                 var fullPath = Path.Combine(pathToSave, fileName);
                 wb.SaveAs(fullPath);
+                var memory = new MemoryStream();
+
+                using (var stream = new FileStream(fullPath, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+
+                memory.Position = 0;
+                mm = memory;
+                fp = fullPath;
             }
 
-            return sousTraitant;
+            return File(mm, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Path.GetFileName(fp));
+
+            // return Ok(new { test = DateTime.Parse(startDate) });
+            //  return File(stream, "application/octet-stream");
             // return File(fullPath, "application/octet-stream");
             // return File(fullPath, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
