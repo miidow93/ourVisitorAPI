@@ -55,7 +55,7 @@ namespace OurVisitors.Controllers
         [HttpGet("byOrder")]
         public async Task<IEnumerable<Regle>> GetRegleByOrder()
         {
-            return await  _context.Regle.OrderBy(x => x.NumOrdre).ToListAsync();
+            return await  _context.Regle.Where(x => x.NumOrdre != null).OrderBy(x => x.NumOrdre).ToListAsync();
         }
 
         // PUT: api/Regles/5
